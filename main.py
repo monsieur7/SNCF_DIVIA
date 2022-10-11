@@ -40,16 +40,26 @@ for i in range(0, len(json[way])):
         print('|', end=" ")
     else:
         print('', end=": ")
-    for j in range(0, len(train_journey['vehicle_journeys'][0]['stop_times']) - 1): # fix this for departures
+    if(way == "departures"):
+        for j in range(0, len(train_journey['vehicle_journeys'][0]['stop_times']) - 1): # fix this for departures
+            #print("debug", train_journey['vehicle_journeys'][0]['stop_times'][i]['stop_point']['name'])
+            if( train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['name']  == 'Dijon' and way == "arrivals"):
+                are_here = False
+            if(are_here == True):
+                if(train_journey['vehicle_journeys'][0]['stop_times'][j]['skipped_stop'] == True):
+                    print("SKIPPED", end="|")
+                print(train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['label'], end=" - ")
+            if( train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['name']  == 'Dijon' and way == "departures"):
+                are_here = True
+    else:
+        for j in range(1, len(train_journey['vehicle_journeys'][0]['stop_times'])): # fix this for departures
         #print("debug", train_journey['vehicle_journeys'][0]['stop_times'][i]['stop_point']['name'])
-        if( train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['name']  == 'Dijon' and way == "arrivals"):
-            are_here = False
-        if(are_here == True):
-            if(train_journey['vehicle_journeys'][0]['stop_times'][j]['skipped_stop'] == True):
-                print("SKIPPED", end="|")
-            print(train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['label'], end=" - ")
-        if( train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['name']  == 'Dijon' and way == "departures"):
-            are_here = True
+            if( train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['name']  == 'Dijon'):
+                are_here = False
+            if(are_here == True):
+                if(train_journey['vehicle_journeys'][0]['stop_times'][j]['skipped_stop'] == True):
+                    print("SKIPPED", end="|")
+                print(train_journey['vehicle_journeys'][0]['stop_times'][j]['stop_point']['label'], end=" - ")
         
     if(way == "departures"):
        are_here = False
