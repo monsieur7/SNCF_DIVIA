@@ -10,7 +10,7 @@ locale.setlocale(locale.LC_TIME,'') # temps en français
     #todo : see array with 1 element => pb ? 
     #todo, => departure time with delay (put base time + delay)
     #todo gui ?
-
+    #todo : remove wieh displaying arrivals the first train stop in the  list of stops 
 #way = "departures" 
 way = "arrivals"
 username = "db91d487-b783-4bd4-a78e-3df3cd675966" #SECRET ID
